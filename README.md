@@ -14,3 +14,9 @@ Add something like the following to your Helm chart values:
           readOnly: true
   shareProcessNamespace: true
 ```
+
+To  update this image please use the following commands
+```bash
+aws ecr get-login-password --region eu-central-1 --profile infrastructure-services | docker login --username AWS --password-stdin 905418369299.dkr.ecr.eu-central-1.amazonaws.com
+docker buildx build --platform linux/arm64 -t 905418369299.dkr.ecr.eu-central-1.amazonaws.com/internal-services/vault/vault-cert-reloader:latest --push .
+```
